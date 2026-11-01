@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>LocalRAG • Sources</title>
+  <style>
+    :root { color-scheme: light dark; font: 15px/1.5 system-ui, sans-serif; }
+    body { max-width: 840px; margin: 3rem auto; padding: 0 1.5rem; }
+    header { display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:1rem; }
+    a { color: #4e92f9; }
+    section { border: 1px solid #7775; border-radius: 12px; padding: 1.25rem; margin: 1.2rem 0; }
+    select, button, input { font: inherit; padding: .5rem; border-radius: 7px; }
+    button { cursor: pointer; }
+    .toolbar { display: flex; flex-wrap:wrap; gap: .7rem; align-items:center; }
+    ul { list-style: none; padding: 0; }
+    li { border-bottom: 1px solid #7773; padding: .6rem 0; display:flex; gap:.7rem; align-items:center; }
+    .filename { flex: 1; overflow-wrap:anywhere; }
+    .muted { opacity:.7; }
+    #status { white-space:pre-wrap; overflow-wrap:anywhere; }
+  </style>
+</head>
+<body>
+<header>
+  <div><h1>LocalRAG sources</h1><p class="muted">Upload, explore and index documents.</p></div>
+  <a href="__LOCALRAG_WEBUI_URL__">Open chat ↗</a>
+</header>
+<section>
+  <h2>Document sources</h2>
+  <div class="toolbar">
+    <label for="source">Source</label><select id="source"></select>
+    <button id="sync">Sync selected source</button>
+    <button id="refresh">Refresh</button>
+  </div>
+  <p id="path" class="muted"></p>
+  <ul id="files"></ul>
+</section>
+<section>
+  <h2>Upload a document</h2>
+  <p class="muted">PDF, DOCX, Markdown or TXT. Uploads are indexed automatically.</p>
+  <form id="upload"><input id="file" type="file" accept=".pdf,.docx,.md,.txt" required>
+    <button type="submit">Upload and index</button></form>
+  <p id="status" role="status"></p>
+</section>
+<p class="muted">Advanced API: <a href="/docs">interactive documentation</a> ·
+  Chat and conversation history are managed by Open WebUI, not this page.</p>
+<script>
+  // Keep this page deliberately framework-free; data is always inserted as text.
+  const source = document.querySelector('#source');
+  const files = document.querySelector('#files');
+  const status = document.querySelector('#status');
+  let currentPath = '';
+
+  async function request(url, options) {
+    const response = await fetch(url, options);
+    if (!response.ok) throw new Error(`${response.status}: ${await response.text()}`);
+    return response.json();
+  }
+
+  function row(label, action, note) {
+    const li = document.createElement('li');
+    const button = document.createElement('button');
+    button.textContent = label;
+    button.className = 'filename';
+    button.addEventListener('click', action);
+    li.append(button);
+    if (note) {
+      const small = document.createElement('small');
+      small.textContent = note;
+      small.className = 'muted';
+      li.append(small);
+    }
+    files.append(li);
+  }
+
+  async function browse(path = '') {
+    currentPath = path;
+    files.replaceChildren();
+    document.querySelector('#path').textContent = `/${source.value}/${path}`;
+    if (path) row('↑ Parent folder', () => browse(path.split('/').slice(0, -1).join('/')));
+    const entries = await request(`/api/sources/${encodeURIComponent(source.value)}/browse?path=${encodeURIComponent(path)}`);
+    for (const entry of entries) {
+      if (entry.is_directory) {
+        row(`📁 ${entry.name}`, () => browse(entry.path));
+      } else {
+        row(`📄 ${entry.name}`, () => {
+          if (entry.doc_id) window.open(`/api/documents/${encodeURIComponent(entry.doc_id)}/open`, '_blank', 'noopener');
+        }, entry.indexed ? 'Indexed' : 'Not indexed');
+      }
+    }
+  }
+
+  async function loadSources() {
+    const previous = source.value;
+    const sources = (await request('/api/sources')).filter(item => item.enabled);
+    source.replaceChildren();
+    for (const item of sources) {
+      const option = document.createElement('option');
+      option.value = item.id;
+      option.textContent = `${item.name || item.id} (${item.document_count} indexed)`;
+      source.append(option);
+    }
+    if (sources.some(item => item.id === previous)) source.value = previous;
+    if (source.value) await browse();
+  }
+
+  async function followJob(jobId) {
+    for (;;) {
+      const job = await request(`/api/jobs/${encodeURIComponent(jobId)}`);
+      status.textContent = `${job.status}: ${job.done}/${job.total} scanned, ${job.indexed} indexed\n` +
+        (job.error || JSON.stringify(job.failed || []));
+      if (job.status !== 'running') break;
+      await new Promise(resolve => setTimeout(resolve, 1500));
+    }
+    await loadSources();
+  }
+
+  const report = error => { status.textContent = `Error: ${error.message}`; };
+  source.addEventListener('change', () => browse().catch(report));
+  document.querySelector('#refresh').addEventListener('click', () => loadSources().catch(report));
+  document.querySelector('#sync').addEventListener('click', async () => {
+    try {
+      status.textContent = 'Indexing…';
+      const job = await request(`/api/sources/${encodeURIComponent(source.value)}/sync`, {method: 'POST'});
+      await followJob(job.job_id);
+    } catch (error) { report(error); }
+  });
+  document.querySelector('#upload').addEventListener('submit', async event => {
+    event.preventDefault();
+    const form = new FormData();
+    form.append('file', document.querySelector('#file').files[0]);
+    try {
+      status.textContent = 'Uploading…';
+      const result = await request('/api/upload', {method: 'POST', body: form});
+      await followJob(result.job.job_id);
+    } catch (error) { report(error); }
+  });
+  loadSources().catch(report);
+</script>
+</body>
+</html>

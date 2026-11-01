@@ -1,0 +1,47 @@
+services:
+  rag-api:
+    build: .
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/api/health', timeout=2)"]
+      interval: 5s
+      timeout: 3s
+      retries: 15
+      start_period: 10s
+    ports:
+      - "127.0.0.1:8000:8000"
+    environment:
+      LOCALRAG_CONFIG: /app/config.yaml
+      # Docker Desktop on macOS accesses the native GPU-backed model server.
+      LOCALRAG_URL_OLLAMA: http://host.docker.internal:11434
+      LOCALRAG_URL_VLLM_METAL: http://host.docker.internal:8001/v1
+      LOCALRAG_EMBEDDING_URL: http://host.docker.internal:11434
+      LOCALRAG_PUBLIC_URL: http://127.0.0.1:8000
+      LOCALRAG_WEBUI_URL: http://127.0.0.1:3000
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - ./config.yaml:/app/config.yaml:ro
+      - ./documents:/app/documents:ro
+      - ./data:/app/data
+    restart: unless-stopped
+
+  webui:
+    image: ghcr.io/open-webui/open-webui:main
+    ports:
+      - "127.0.0.1:3000:8080"
+    environment:
+      ENABLE_PERSISTENT_CONFIG: "false"
+      ENABLE_OLLAMA_API: "false"
+      ENABLE_OPENAI_API: "true"
+      OPENAI_API_BASE_URLS: http://rag-api:8000/v1
+      OPENAI_API_KEYS: localrag-local
+      OPENAI_API_CONFIGS: '{"0":{"enable":true,"model_ids":[]}}'
+    volumes:
+      - webui-data:/app/backend/data
+    depends_on:
+      rag-api:
+        condition: service_healthy
+    restart: unless-stopped
+
+volumes:
+  webui-data:

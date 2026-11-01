@@ -1,0 +1,80 @@
+# Copy to config.yaml, then edit only what you need.
+app:
+  title: LocalRAG
+  data_dir: ./data
+  webui_url: http://127.0.0.1:8080  # Docker Compose overrides to :3000.
+  max_upload_mb: 25
+
+llm:
+  default: ollama
+  providers:
+    # All installed chat-capable Ollama models appear in the UI automatically.
+    - id: ollama
+      provider: ollama
+      enabled: true
+      discover: true
+      base_url: http://localhost:11434
+      context_length: 8192
+      temperature: 0.2
+      thinking: false
+
+    # Apple Silicon vLLM-Metal exposes an OpenAI-compatible endpoint.
+    - id: vllm-metal
+      provider: openai
+      enabled: false  # Enable after starting the vLLM-Metal server.
+      discover: true
+      base_url: http://localhost:8001/v1
+      context_length: 8192
+      temperature: 0.2
+
+    # For HPC clusters or servers running standard vLLM, replace URL/model.
+    - id: vllm-hpc
+      provider: openai
+      enabled: false
+      discover: true
+      base_url: http://your-cluster-gateway:8001/v1
+      api_key_env: VLLM_API_KEY
+      context_length: 8192
+
+# Embeddings are separate from the generation model. Keep Ollama for embeddings
+# even when you generate answers with vLLM, unless you configure an alternative.
+embeddings:
+  provider: ollama
+  base_url: http://localhost:11434
+  model: embeddinggemma
+  batch_size: 8
+
+retrieval:
+  mode: hybrid             # dense / sparse / hybrid (RRF)
+  dense_top_k: 20
+  sparse_top_k: 20
+  fusion_k: 60
+  final_top_k: 5
+  chunk_chars: 1300
+  chunk_overlap: 180
+
+reranker:
+  enabled: false           # Optional, consumes additional RAM on a 16 GB Mac.
+  provider: sentence_transformers
+  model: BAAI/bge-reranker-v2-m3
+  device: cpu              # cpu / mps / cuda
+
+sources:
+  - id: documents
+    type: local
+    name: Local documents
+    path: ./documents
+    recursive: true
+    enabled: true
+    extensions: [".pdf", ".docx", ".md", ".txt"]
+  - id: uploads
+    type: upload
+    name: Uploaded files
+    enabled: true
+  - id: drive
+    type: google_drive
+    name: Google Drive (opt-in)
+    enabled: false
+    folder_ids: []         # Explicit shared/owned folder IDs, no whole-drive crawl.
+    credentials_file: ./credentials.json
+    token_file: ./data/google_token.json

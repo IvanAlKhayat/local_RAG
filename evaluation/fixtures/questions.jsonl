@@ -1,0 +1,70 @@
+{"query":"At what time does Northstar publish the daily weather digest?","relevant_files":["northstar_station.md"],"answer_contains":"06:40","category":"exact"}
+{"query":"Which instrument at Northstar observes aerosols?","relevant_files":["northstar_station.md"],"answer_contains":"lidar","category":"exact"}
+{"query":"What sustained wind threshold triggers storm alerts at the polar outpost?","relevant_files":["northstar_station.md"],"answer_contains":"24","category":"paraphrase"}
+{"query":"How often must the emergency satellite radio be checked?","relevant_files":["northstar_station.md"],"answer_contains":"eight hours","category":"paraphrase"}
+{"query":"Where are instrument calibration certificates kept at Northstar?","relevant_files":["northstar_station.md"],"answer_contains":"technical archive","category":"exact"}
+{"query":"At what time does the first Cobalt Harbor ferry leave?","relevant_files":["cobalt_harbor.md"],"answer_contains":"07:15","category":"exact"}
+{"query":"Below what visibility does the harbor activate its yellow warning beacon?","relevant_files":["cobalt_harbor.md"],"answer_contains":"400","category":"paraphrase"}
+{"query":"Which maritime transmission system is monitored by harbor pilots?","relevant_files":["cobalt_harbor.md"],"answer_contains":"AIS","category":"paraphrase"}
+{"query":"How long are pier inspection records kept?","relevant_files":["cobalt_harbor.md"],"answer_contains":"five years","category":"paraphrase"}
+{"query":"Who can request a portable boarding ramp at the ferry terminal?","relevant_files":["cobalt_harbor.md"],"answer_contains":"reduced mobility","category":"exact"}
+{"query":"What resolution is used to scan fragile Elmbridge newspapers?","relevant_files":["elmbridge_library.md"],"answer_contains":"300","category":"exact"}
+{"query":"Which format stores the library's public access derivatives?","relevant_files":["elmbridge_library.md"],"answer_contains":"PDF/A","category":"paraphrase"}
+{"query":"Why does Elmbridge review automatic newspaper transcriptions?","relevant_files":["elmbridge_library.md"],"answer_contains":"faded ink","category":"paraphrase"}
+{"query":"How are digitized archive items connected to their physical originals?","relevant_files":["elmbridge_library.md"],"answer_contains":"persistent identifier","category":"paraphrase"}
+{"query":"What capture method is preferred for damaged volumes?","relevant_files":["elmbridge_library.md"],"answer_contains":"noncontact imaging","category":"paraphrase"}
+{"query":"What battery charge percentage activates an alert at Cedar Campus?","relevant_files":["cedar_energy.md"],"answer_contains":"18","category":"exact"}
+{"query":"How frequently do Cedar Campus engineers compare solar forecasts to meters?","relevant_files":["cedar_energy.md"],"answer_contains":"fifteen minutes","category":"paraphrase"}
+{"query":"What is the purpose of the campus water tank thermal storage?","relevant_files":["cedar_energy.md"],"answer_contains":"peak grid imports","category":"paraphrase"}
+{"query":"Which equipment logs help diagnose unexpected solar shutdowns?","relevant_files":["cedar_energy.md"],"answer_contains":"inverter","category":"paraphrase"}
+{"query":"How many teaching buildings receive heat from the campus system?","relevant_files":["cedar_energy.md"],"answer_contains":"three","category":"exact"}
+{"query":"Which satellite imagery does Pinewatch examine for burns?","relevant_files":["pinewatch_forest.md"],"answer_contains":"Sentinel-2","category":"exact"}
+{"query":"When does the forest monitoring center publish a hazard map?","relevant_files":["pinewatch_forest.md"],"answer_contains":"Thursday","category":"paraphrase"}
+{"query":"What conditions make optical wildfire scenes unsuitable for immediate classification?","relevant_files":["pinewatch_forest.md"],"answer_contains":"cloud","category":"paraphrase"}
+{"query":"Which types of terrain are classified by the wildfire imagery model?","relevant_files":["pinewatch_forest.md"],"answer_contains":"burned","category":"paraphrase"}
+{"query":"Does the remote sensing initiative dispatch firefighting crews autonomously?","relevant_files":["pinewatch_forest.md"],"answer_contains":"does not","category":"paraphrase"}
+{"query":"What is the standard turnaround for routine Westbank lab results?","relevant_files":["westbank_clinic.md"],"answer_contains":"two working days","category":"exact"}
+{"query":"When are the clinic barcode scanners validated?","relevant_files":["westbank_clinic.md"],"answer_contains":"Monday","category":"paraphrase"}
+{"query":"Who may view named patient results at the outpatient clinic?","relevant_files":["westbank_clinic.md"],"answer_contains":"authorized medical staff","category":"paraphrase"}
+{"query":"How does Westbank match laboratory samples to appointments?","relevant_files":["westbank_clinic.md"],"answer_contains":"barcode","category":"exact"}
+{"query":"Which stock attribute is tracked to avoid expired clinic reagents?","relevant_files":["westbank_clinic.md"],"answer_contains":"expiration","category":"paraphrase"}
+{"query":"How early should Meridian Rail passengers request assistance?","relevant_files":["meridian_rail.md"],"answer_contains":"24 hours","category":"exact"}
+{"query":"What is the interchange duration at the central train junction?","relevant_files":["meridian_rail.md"],"answer_contains":"12-minute","category":"paraphrase"}
+{"query":"Which rail equipment is inspected during overnight checks for wheelchair users?","relevant_files":["meridian_rail.md"],"answer_contains":"door sensors","category":"paraphrase"}
+{"query":"Does the onboard carriage counter identify individual passengers?","relevant_files":["meridian_rail.md"],"answer_contains":"does not","category":"paraphrase"}
+{"query":"Which kind of ramp is deployed at stations without level boarding?","relevant_files":["meridian_rail.md"],"answer_contains":"portable","category":"exact"}
+{"query":"What nitrate concentration threshold does Silver River use?","relevant_files":["silver_river.md"],"answer_contains":"12","category":"exact"}
+{"query":"When are upstream Silver River samples collected?","relevant_files":["silver_river.md"],"answer_contains":"Tuesday","category":"exact"}
+{"query":"What happens to river readings when mobile connectivity is lost?","relevant_files":["silver_river.md"],"answer_contains":"caches","category":"paraphrase"}
+{"query":"Which three water quality measurements are recorded by river probes?","relevant_files":["silver_river.md"],"answer_contains":"turbidity","category":"paraphrase"}
+{"query":"What circumstance can stop manual environmental sampling for safety?","relevant_files":["silver_river.md"],"answer_contains":"flood","category":"paraphrase"}
+{"query":"What humidity range is maintained for Alder Museum parchment?","relevant_files":["alder_museum.md"],"answer_contains":"45 to 55","category":"exact"}
+{"query":"On which day is the museum conservation laboratory closed to visitors?","relevant_files":["alder_museum.md"],"answer_contains":"Monday","category":"exact"}
+{"query":"What type of light exposure is limited in the exhibition gallery?","relevant_files":["alder_museum.md"],"answer_contains":"ultraviolet","category":"paraphrase"}
+{"query":"Why are fragile parchments displayed in short rotations?","relevant_files":["alder_museum.md"],"answer_contains":"light damage","category":"paraphrase"}
+{"query":"Which records are prepared for a new museum acquisition?","relevant_files":["alder_museum.md"],"answer_contains":"condition report","category":"paraphrase"}
+{"query":"How many mobile robots operate in the Kestrel test fleet?","relevant_files":["kestrel_robotics.md"],"answer_contains":"six","category":"exact"}
+{"query":"What obstacle distance triggers a robotics safety stop?","relevant_files":["kestrel_robotics.md"],"answer_contains":"0.6","category":"paraphrase"}
+{"query":"Which navigation sensors are used for robot localization?","relevant_files":["kestrel_robotics.md"],"answer_contains":"lidar","category":"paraphrase"}
+{"query":"How are warehouse package bins identified?","relevant_files":["kestrel_robotics.md"],"answer_contains":"QR","category":"paraphrase"}
+{"query":"Who authorizes changes to restricted warehouse robot routes?","relevant_files":["kestrel_robotics.md"],"answer_contains":"human supervisor","category":"paraphrase"}
+{"query":"Where is the daily atmospheric bulletin published near dawn?","relevant_files":["northstar_station.md"],"answer_contains":"Northstar","category":"hard_paraphrase"}
+{"query":"What is the mandatory interval between backup voice-link checks at the icebound facility?","relevant_files":["northstar_station.md"],"answer_contains":"eight hours","category":"hard_paraphrase"}
+{"query":"Which port relies on ship transponders before allowing boats to depart?","relevant_files":["cobalt_harbor.md"],"answer_contains":"Cobalt","category":"hard_paraphrase"}
+{"query":"How long must waterfront structural inspection evidence be retained?","relevant_files":["cobalt_harbor.md"],"answer_contains":"five years","category":"hard_paraphrase"}
+{"query":"What process transforms antique newsprint into machine-searchable words?","relevant_files":["elmbridge_library.md"],"answer_contains":"OCR","category":"hard_paraphrase"}
+{"query":"How are errors from faded typography corrected before online publication?","relevant_files":["elmbridge_library.md"],"answer_contains":"review","category":"hard_paraphrase"}
+{"query":"Which installation shifts energy use away from expensive winter peak periods?","relevant_files":["cedar_energy.md"],"answer_contains":"thermal storage","category":"hard_paraphrase"}
+{"query":"When do facility managers get warned about a nearly empty energy reserve?","relevant_files":["cedar_energy.md"],"answer_contains":"18","category":"hard_paraphrase"}
+{"query":"Which initiative checks orbital pictures against observations from people on the ground?","relevant_files":["pinewatch_forest.md"],"answer_contains":"Pinewatch","category":"hard_paraphrase"}
+{"query":"Why do sky-obscured overhead images fail the vegetation damage inspection?","relevant_files":["pinewatch_forest.md"],"answer_contains":"cloud","category":"hard_paraphrase"}
+{"query":"How does the medical center stop strangers from reading named laboratory records?","relevant_files":["westbank_clinic.md"],"answer_contains":"authorized","category":"hard_paraphrase"}
+{"query":"Which system tracks perishable chemicals before they become unusable?","relevant_files":["westbank_clinic.md"],"answer_contains":"inventory","category":"hard_paraphrase"}
+{"query":"What lead time is recommended for mobility support before traveling by train?","relevant_files":["meridian_rail.md"],"answer_contains":"24 hours","category":"hard_paraphrase"}
+{"query":"Does the onboard headcount device retain people's names?","relevant_files":["meridian_rail.md"],"answer_contains":"does not","category":"hard_paraphrase"}
+{"query":"What limit is used for the dissolved farming nutrient in the freshwater study?","relevant_files":["silver_river.md"],"answer_contains":"12","category":"hard_paraphrase"}
+{"query":"Where are stream measurements buffered while cellular connectivity is interrupted?","relevant_files":["silver_river.md"],"answer_contains":"sensor gateway","category":"hard_paraphrase"}
+{"query":"Which collection restricts invisible short-wavelength illumination around fragile objects?","relevant_files":["alder_museum.md"],"answer_contains":"Alder","category":"hard_paraphrase"}
+{"query":"What environmental condition keeps ancient animal-skin documents from deteriorating?","relevant_files":["alder_museum.md"],"answer_contains":"humidity","category":"hard_paraphrase"}
+{"query":"At what distance should an automated warehouse vehicle brake for a blockage?","relevant_files":["kestrel_robotics.md"],"answer_contains":"0.6","category":"hard_paraphrase"}
+{"query":"Which facility codes parcels while guiding moving machines along aisles?","relevant_files":["kestrel_robotics.md"],"answer_contains":"Kestrel","category":"hard_paraphrase"}

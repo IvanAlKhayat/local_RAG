@@ -1,0 +1,17 @@
+.venv/
+.venv-rag/
+.venv-webui/
+.venv-rag312/
+.venv-webui312/
+.webui_secret_key
+__pycache__/
+.pytest_cache/
+pytest-of-root/
+*.py[cod]
+*.egg-info/
+config.yaml
+credentials.json
+data/
+documents/*
+!documents/.gitkeep
+*.zip

@@ -1,0 +1,28 @@
+{
+  "benchmark": "synthetic-retrieval-v1",
+  "scope": "retrieval only; no generated answers, citations or LLM latency measured",
+  "mode": "sparse",
+  "embedding_model": "not used (sparse-only)",
+  "indexing_scope": "parser + SQLite FTS5 only",
+  "platform": "Linux x86_64",
+  "python": "3.12.14",
+  "docs": 10,
+  "questions": 70,
+  "indexing_seconds": 0.022,
+  "metrics": {
+    "recall_at_1": 0.8714,
+    "recall_at_5": 1.0,
+    "mrr_at_5": 0.9262,
+    "ndcg_at_5": 0.945
+  },
+  "recall_by_category": {
+    "exact": 1.0,
+    "hard_paraphrase": 1.0,
+    "paraphrase": 1.0
+  },
+  "query_latency_ms": {
+    "p50": 0.857,
+    "p95": 2.024
+  },
+  "misses": []
+}
